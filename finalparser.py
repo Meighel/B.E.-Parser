@@ -20,7 +20,7 @@ class Position:
 
 class Token:
     def __init__(self, type, value=None, start=None, end=None, position=None):
-        self.type = type
+        self.type = type 
         self.value = value
         self.position = position
         self.start = start
@@ -168,7 +168,7 @@ class Interpreter:
             inner_node = node.node
             if isinstance(inner_node, UnaryNode) and inner_node.not_tok.value == 'NOT':
                 inner_node = inner_node.node
-            # Only remove if there are two or more consecutive NOT nodes
+
             if inner_node is not node.node:
                 return inner_node
             else:
@@ -245,14 +245,12 @@ def run(user_expression):
 
     simplified_ast = interpreter.simplify_expression(ast)
 
-    simplified_node = interpreter.rules_of_b_algebra(simplified_ast)
-
-    return tokens, ast, simplified_ast, simplified_node
+    return tokens, ast, simplified_ast
 
 if __name__ == '__main__':
     while True:
         user_expression = input("Enter an Expression: ")
-        tokens, ast, simplified_ast, simplified_node = run(user_expression)
+        tokens, ast, simplified_ast = run(user_expression)
 
         # Print tokens
         print("\nTokens:")
@@ -266,9 +264,3 @@ if __name__ == '__main__':
         # Print Simplified AST
         print("\nSimplified AST:")
         print(simplified_ast)
-
-        # Print Final Simplified Node
-        print("\nFinal Simplified Node:")
-        print(simplified_node)
-
-
